@@ -124,7 +124,8 @@ def strnum2words(str_pos:StrId,
 
 FD=FileData('_sm234.vhd')
 
-def fdfind(word:Word, start_str:StrId, fd:FileData=FD)->Optional[Position]:
+def find(word:Word, start_str:StrId, fd:FileData=FD)->Optional[Position]:
+  """ Поиск слова в прямом направлении, начиная с данного номера строки """
   for nline in range(start_str,len(fd.lines)):
     for w,pos_start,pos_stop in strnum2words(nline,fd=fd):
       if w==word:
@@ -132,6 +133,7 @@ def fdfind(word:Word, start_str:StrId, fd:FileData=FD)->Optional[Position]:
   return None
 
 def find_r(word:Word, start_str:StrId, fd:FileData=FD)->Optional[Position]:
+  """ Поиск слова в обратном направлении, начиная с данного номера строки """
   for nline in reversed(range(0,start_str+1)):
     for w,pos_start,pos_stop in reversed(strnum2words(nline,fd=fd)):
       if w==word:
